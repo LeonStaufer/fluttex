@@ -35,6 +35,7 @@ lib/generated_plugin_registrant.dart
 
 # Android related
 **/android/**/gradle-wrapper.jar
+**/android/**/gradle-wrapper.properties
 **/android/.gradle
 **/android/captures/
 **/android/gradlew
