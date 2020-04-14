@@ -9,7 +9,7 @@
     <br />
     <a href='https://pub.dev/packages/fluttex'><img alt="pub.dev fluttex" src="https://img.shields.io/pub/v/fluttex" /></a>
     <a href="https://github.com/LeonStaufer/fluttex/issues/new"><img alt="GitHub issues" src="https://img.shields.io/github/issues/LeonStaufer/fluttex"></a>
-    <a href="https://github.com/LeonStaufer/fluttex"><img alt="Apache 2.0 License" src="https://img.shields.io/github/license/LeonStaufer/fluttex"></a>
+    <a href="https://github.com/LeonStaufer/fluttex"><img alt="BSD 3-Clause License" src="https://img.shields.io/github/license/LeonStaufer/fluttex"></a>
     <br />
   </p>
 </p>
