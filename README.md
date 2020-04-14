@@ -150,6 +150,9 @@ If you have any questions, feel free to contact [Leon Staufer][email].
 
 Project Link: [https://github.com/LeonStaufer/fluttex][project]
 
+## Disclaimer
+
+> This plugin has been developed independently from and is not endorsed by Google. Flutter, and the Flutter logo are registered trademarks owned by the Google.
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
