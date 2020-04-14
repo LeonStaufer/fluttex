@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
-import 'package:fluttex/fluttex.dart';
+import 'package:fluttex/math_view_static.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,32 +9,23 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
+  final _textController = TextEditingController();
+  MathViewController _mathViewController;
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+
+    //render the TeX once the input changes
+    _textController.addListener(() {
+      _mathViewController?.render(_textController.text);
+    });
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      platformVersion = await Fluttex.platformVersion;
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
   }
 
   @override
@@ -45,10 +33,46 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('fluttex Example'),
+          backgroundColor: Colors.black87,
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Column(
+          children: <Widget>[
+            Container(
+              height: 150,
+              child: MathViewStatic(
+                displayMode: true,
+                tex: "\\text{Static MathView Example} \\\\"
+                    "\\int_{-\\infty}^\\infty \\hat f(\\xi)\\,e^{2 \\pi i \\xi x} \\,d\\xi \\\\"
+                    "\\ce{\$K = \\frac{[\ce{Hg^2+}][\\ce{Hg}]}{[\\ce{Hg2^2+}]}\$}",
+              ),
+            ),
+            Divider(),
+            Text(
+              "Dynamic MathView Example",
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.subtitle2,
+            ),
+            Container(
+              height: 200,
+              child: MathViewStatic(
+                key: UniqueKey(),
+                displayMode: true,
+                color: Colors.white,
+                backgroundColor: Colors.black87,
+                onMathViewCreated: (controller) {
+                  _mathViewController = controller;
+                },
+              ),
+            ),
+            Divider(),
+            TextField(
+              controller: _textController,
+              decoration: InputDecoration(
+                hintText: "Starting typing to have the TeX be rendered above..."
+              ),
+            )
+          ],
         ),
       ),
     );
