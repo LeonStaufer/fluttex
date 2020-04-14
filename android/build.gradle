@@ -25,10 +25,14 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 17
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     lintOptions {
-        disable 'InvalidPackage'
+        warning 'InvalidPackage'
     }
+}
+
+dependencies {
+    implementation "me.staufer:textools:1.0.+"
 }
