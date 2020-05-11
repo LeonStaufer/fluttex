@@ -76,12 +76,8 @@ class MathViewStatic extends StatelessWidget {
     switch (Theme.of(context).platform) {
       case TargetPlatform.android:
         {
-          child = AndroidView(
-            viewType: 'mathview',
-            onPlatformViewCreated: _onPlatformViewCreated,
-            creationParams: _parameters,
-            creationParamsCodec: StandardMessageCodec(),
-          );
+          child = _AndroidViewStack(_onPlatformViewCreated, _parameters,
+              color: backgroundColor);
           break;
         }
 
@@ -131,5 +127,61 @@ class MathViewController {
   /// Render the passed [tex] string asynchronously.
   Future<void> render(String tex) async {
     return _channel.invokeMethod("render", tex);
+  }
+}
+
+/// Widget that wraps the AndroidView for creating the MathView
+/// allowing more control over what do display when the
+/// widget is loading.
+class _AndroidViewStack extends StatefulWidget {
+  /// callback when the AndroidView has successfully loaded
+  final Function platformViewCreatedCallback;
+
+  /// parameters for loading the MathView
+  final Map parameters;
+
+  /// background color while the MathView is loading
+  final Color color;
+
+  const _AndroidViewStack(this.platformViewCreatedCallback, this.parameters,
+      {this.color = Colors.white});
+
+  @override
+  State<StatefulWidget> createState() {
+    return _AndroidViewStackState();
+  }
+}
+
+class _AndroidViewStackState extends State<_AndroidViewStack> {
+  bool _isLoaded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    // render a container with the specified color while the
+    // AndroidView is still loading
+    return Stack(
+      children: <Widget>[
+        AndroidView(
+          viewType: 'mathview',
+          onPlatformViewCreated: _onPlatformViewCreated,
+          creationParams: widget.parameters,
+          creationParamsCodec: StandardMessageCodec(),
+        ),
+        !_isLoaded
+            ? Container(
+                decoration: BoxDecoration(
+                color: widget.color,
+              ))
+            : Container()
+      ],
+    );
+  }
+
+  void _onPlatformViewCreated(int id) {
+    setState(() {
+      _isLoaded = true;
+    });
+
+    widget.platformViewCreatedCallback(id);
   }
 }
