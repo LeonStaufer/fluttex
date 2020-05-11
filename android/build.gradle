@@ -34,5 +34,5 @@ android {
 }
 
 dependencies {
-    implementation "me.staufer:textools:1.0.+"
+    implementation "me.staufer:textools:1.0.4"
 }
