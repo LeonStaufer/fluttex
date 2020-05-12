@@ -44,19 +44,7 @@ This project provides an efficient Widget that renders TeX equations using [KaTe
 
 ### Installation
 
-1. Add this to your package's `pubspec.yaml` file:    
-   ```yaml
-   dependencies:
-     fluttex: ^0.0.1
-   ```
-2. You can install packages from the command line with:
-   ```shell script
-   flutter pub get
-   ```
-3. Now in your Dart code, you can import it:
-    ```dart
-    import 'package:fluttex/fluttex.dart';
-   ```
+Refer to the [installation guide](https://pub.dev/packages/fluttex#-installing-tab-) on pub.dev
 
 ### Usage
 
