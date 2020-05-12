@@ -7,7 +7,7 @@ typedef MathViewCreatedCallback = void Function(MathViewController controller);
 
 /// A static MathView that renders TeX using KaTeX.
 class MathViewStatic extends StatelessWidget {
-  MathViewStatic(
+  const MathViewStatic(
       {Key key,
       this.onMathViewCreated,
       this.color = Colors.black87,
@@ -153,7 +153,7 @@ class _AndroidViewStack extends StatefulWidget {
 }
 
 class _AndroidViewStackState extends State<_AndroidViewStack> {
-  bool _isLoaded = false;
+  bool _isLoading = true;
 
   @override
   Widget build(BuildContext context) {
@@ -165,13 +165,15 @@ class _AndroidViewStackState extends State<_AndroidViewStack> {
           viewType: 'mathview',
           onPlatformViewCreated: _onPlatformViewCreated,
           creationParams: widget.parameters,
-          creationParamsCodec: StandardMessageCodec(),
+          creationParamsCodec: const StandardMessageCodec(),
         ),
-        !_isLoaded
+        _isLoading
             ? Container(
+                child: Icon(Icons.face),
                 decoration: BoxDecoration(
-                color: widget.color,
-              ))
+                  color: widget.color,
+                ),
+              )
             : Container()
       ],
     );
@@ -179,7 +181,7 @@ class _AndroidViewStackState extends State<_AndroidViewStack> {
 
   void _onPlatformViewCreated(int id) {
     setState(() {
-      _isLoaded = true;
+      _isLoading = false;
     });
 
     widget.platformViewCreatedCallback(id);
