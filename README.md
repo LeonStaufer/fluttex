@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/LeonStaufer/fluttex">
-    <img src="assets/logo.png" alt="Logo for fluttex" width="953" height="272" />
+    <img src="https://raw.githubusercontent.com/LeonStaufer/fluttex/master/assets/logo.png" alt="Logo for fluttex" width="953" height="272" />
   </a>
 
   <p align="center">
@@ -31,7 +31,7 @@
 
 ## About
 
-<img alt="Screenshot of the TeX Tools Example App" src="assets/screenshot.jpg" width="400" />
+<img alt="Screenshot of the TeX Tools Example App" src="https://raw.githubusercontent.com/LeonStaufer/fluttex/master/assets/screenshot.jpg" width="400" />
 
 **Fluttex** is a customizable Flutter plugin that renders TeX equations blazingly fast.
 
