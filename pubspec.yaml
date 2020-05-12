@@ -1,6 +1,6 @@
 name: fluttex
 description: Customizable Flutter plugin that renders TeX equations blazingly fast.
-version: 0.0.1
+version: 0.0.2
 author: Leon Staufer
 homepage: https://github.com/LeonStaufer/fluttex
 repository: https://github.com/LeonStaufer/fluttex
