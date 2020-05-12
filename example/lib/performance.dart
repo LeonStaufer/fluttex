@@ -15,6 +15,11 @@ class PerformanceScreen extends StatelessWidget {
     "\\pi"
   ];
 
+  static final List<Widget> mathViews =
+      List.generate(50, (index) => generateMathView(index));
+
+  static final Random random = Random();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,32 +28,35 @@ class PerformanceScreen extends StatelessWidget {
         backgroundColor: Colors.black87,
       ),
       body: ListView(
-        children: List.generate(50, (index) => generateMathView()),
+        children: mathViews,
       ),
     );
   }
 
-  Widget generateMathView() {
+  static Widget generateMathView(int index) {
+    final color = Colors.primaries[random.nextInt(Colors.primaries.length)];
     return Container(
-      height: 50,
+      height: 100,
+      padding: const EdgeInsets.all(8),
       child: MathViewStatic(
+        key: ValueKey(index),
         tex: randomTex(),
-        backgroundColor:
-            Colors.primaries[Random().nextInt(Colors.primaries.length)],
+        displayMode: true,
+        backgroundColor: color,
       ),
     );
   }
 
-  String randomTex() {
-    String tex = Random().nextInt(200).toString();
+  static String randomTex() {
+    String tex = random.nextInt(200).toString();
     for (int i = 0; i < 5; i++) {
       tex += randomSymbol();
-      tex += Random().nextInt(200).toString();
+      tex += random.nextInt(200).toString();
     }
     return tex;
   }
 
-  String randomSymbol() {
-    return symbols[Random().nextInt(symbols.length)];
+  static String randomSymbol() {
+    return symbols[random.nextInt(symbols.length)];
   }
 }
